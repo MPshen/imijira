@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { RegisterScreen} from "./register";
 import { LoginScreen } from "./login";
-import { Button, Card } from "antd";
+import { Button, Card, Divider } from "antd";
 import styled from "@emotion/styled";
 import logo from '../assets/logo.svg'
 import left from '../assets/left.svg'
@@ -20,9 +20,10 @@ export const UnauthenticatedApp = () => {
                 {
                     isRegister ? <RegisterScreen/>:<LoginScreen/>
                 }
-                <a onClick={() => setIsRegister(!isRegister)}>
+                {/* <Divider /> */}
+                <Button type={"link"} onClick={() => setIsRegister(!isRegister)}>
                     {isRegister ? '已经有账号了？直接登录' : '没有账号？注册新账号'}
-                </a>
+                </Button>
             </ShadowCard>
         </Container>
     );
