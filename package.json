@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.2.0",
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -23,9 +25,9 @@
   },
   "scripts": {
     "javascript.suggestionActions.enabled": "false",
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -47,6 +49,8 @@
     ]
   },
   "devDependencies": {
-    "@types/qs": "^6.9.7"
+    "@emotion/babel-preset-css-prop": "^11.2.0",
+    "@types/qs": "^6.9.7",
+    "less-loader": "^7.3.0"
   }
 }
