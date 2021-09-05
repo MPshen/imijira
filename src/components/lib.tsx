@@ -26,11 +26,15 @@ justify-content: center ;
 align-items: center;
 `
 
-export const FullPageLoading = () => <FullPage>
-    <Spin size={"large"}/>
-</FullPage>
+export const FullPageLoading = () => (
+    <FullPage>
+        <Spin size={"large"}/>
+    </FullPage>
+);
 
-export const FullPageErrorFallback = ({error}:{error: Error | null}) => <FullPage>
-    <DevTools/>
-    <Typography.Text type={'danger'}>{error?.message}</Typography.Text>
-</FullPage>
+export const FullPageErrorFallback = ({error}:{error: Error | null}) => (
+    <FullPage>
+        <DevTools/>
+        <Typography.Text type={'danger'}>{error?.message}</Typography.Text>
+    </FullPage>
+);
