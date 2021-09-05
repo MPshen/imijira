@@ -30,6 +30,9 @@ export const useDebounce = (value:any,delay?:number) => {
     return debounceValue
 }
 
+
+export const resetRoute = () => window.location.href = window.location.origin
+
 /** homework01 */
 export const useArray = <T>(initialArray: T[]) => {
     //type homework01 here
