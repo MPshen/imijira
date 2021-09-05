@@ -5,13 +5,31 @@ import { useAuth } from "./context/auth-context";
 import { ProjectListScreen } from "./screens/project-list";
 import {ReactComponent as SoftwareLogo} from "./assets/software-logo.svg"
 import { Button, Dropdown, Menu } from "antd";
+import { Navigate, Routes,Route } from "react-router";
+import { BrowserRouter as Router } from "react-router-dom";
+import { ProjectScreen } from "./screens/project";
 
-export const AuthenticatedApp = () => {
-    const {logout,user} = useAuth()
-    
+export const AuthenticatedApp = () => {    
     return (
         <Container>
-            <Header between={true}>
+            <PageHeader/>
+            <Main>
+                {/* <ProjectListScreen/>  */}
+                <Router>
+                    <Routes>
+                        <Route path={'/projects'} element={<ProjectListScreen/>}/>
+                        <Route path={'/projects/:projectId/*'} element={<ProjectScreen/>}/>                
+                    </Routes> 
+                </Router>              
+            </Main>
+        </Container>
+    ); 
+}
+
+const PageHeader = () => {
+    const {logout,user} = useAuth()
+    return (
+        <Header between={true}>
                 <HeaderLeft gap={true}>
                     <SoftwareLogo width={'18rem'} color={'rgb(38, 132,255'}/>
                     <h3>项目</h3>
@@ -31,11 +49,7 @@ export const AuthenticatedApp = () => {
                     </Dropdown>                    
                 </HeaderRight>                               
             </Header>
-            <Main>
-                <ProjectListScreen/>                
-            </Main>
-        </Container>
-    ); 
+    )
 }
 
 const Container = styled.div`

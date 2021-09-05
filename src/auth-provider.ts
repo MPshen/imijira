@@ -13,7 +13,7 @@ export const handleUserResponse =({user}:{user:User}) => {
     return user
 }
 
-export const login = (data: {username: string, password:string}) => {
+export const login = async(data: {username: string, password:string}) => {
     return fetch(`${apiUrl}/login`,{
         method: "POST",
         headers:{
@@ -29,7 +29,7 @@ export const login = (data: {username: string, password:string}) => {
     });
 }
 
-export const register = (data:{username: string, password: string}) => {
+export const register = async(data:{username: string, password: string}) => {
     return fetch(`${apiUrl}/register`,{
         method:"POST",
         headers:{
