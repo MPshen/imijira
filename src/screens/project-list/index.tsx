@@ -6,6 +6,7 @@ import { useMount, useDebounce, cleanObject } from "../../utils";
 // import * as qs from "qs";
 import { useHttp } from "../../utils/http";
 import styled from "@emotion/styled";
+import { Typography } from "antd";
 // const apiUrl = process.env.REACT_APP_API_URL
 
 
@@ -17,34 +18,31 @@ export const ProjectListScreen = () => {
     const [users, setUsers] = useState([])
     const [list, setList] = useState([])
     const client = useHttp()
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState<null | Error>(null)
 
-    const debounceParam = useDebounce(param,1000)
+    const debounceParam = useDebounce(param,200)
 
     useEffect(()=>{
-        // fetch(`http://localhost:3001/projects?${debounceParam.name?`name=${debounceParam.name}&`:''}${debounceParam.personId?`personId=${debounceParam.personId}`:''}`).then(async response => {
-        // fetch(`http://localhost:3001/projects?${qs.stringify(cleanObject(debounceParam))}`).then(async response => {
-        client('projects',{data: cleanObject(debounceParam)}).then(setList)
-        // fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debounceParam))}`).then(async response => {
-        //     if(response.ok){
-        //         setList(await response.json())
-        //     }
-        // })
+        setIsLoading(true)
+        client('projects',{data: cleanObject(debounceParam)})
+        .then(setList)
+        .catch(error => {
+            setList([])
+            setError(error)
+        })
+        .finally(() => setIsLoading(false));
     },[debounceParam])
 
     useMount(()=>{
-        // fetch(`http://localhost:3001/users`).then(async response => {
         client('users').then(setUsers)
-        // fetch(`${apiUrl}/users`).then(async response => {
-        //     if(response.ok){
-        //         setUsers(await response.json())
-        //     }
-        // })
     });
 
     return (<Container>
         <h1>项目列表</h1>
         <SearchPanel users={users} param={param} setParam={setParam}/>
-        <List users={users} list={list}/>
+        {error? <Typography.Text type={"danger"}>{error.message}</Typography.Text>:null}
+        <List loading={isLoading} users={users} dataSource={list}/>
     </Container>)
 }
 

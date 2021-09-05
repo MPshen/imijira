@@ -23,9 +23,10 @@ export const AuthenticatedApp = () => {
                             {/* <a onClick={logout}>登出</a> */}
                         </Menu.Item>
                     </Menu>}>
-                        <a onClick={e => e.preventDefault()}>
-                            Hi,{user?.name}
-                        </a>
+                        <Button type={"link"} >Hi,{user?.name}</Button>
+                        {/* <a onClick={e => e.preventDefault()}> */}
+                            {/* Hi,{user?.name} */}
+                        {/* </a> */}
                     </Dropdown>                    
                 </HeaderRight>                               
             </Header>
